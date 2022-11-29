@@ -19,6 +19,11 @@ const row = (bill) => {
     `)
   }
 
+/**
+ * fix #1
+ * @param {array} data 
+ * @returns 
+ */
 const rows = (data) => {
   return data && data.length
     ? data
