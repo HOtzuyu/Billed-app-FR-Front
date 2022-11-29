@@ -25,7 +25,12 @@ export default class NewBill {
     formData.append('file', file)
     formData.append('email', email)
 
-    this.store
+    var re = /(?:\.([^.]+))?$/
+    var ext = re.exec(`${filePath[2]}`)[1]
+    console.log(ext)
+
+    if(ext === "jpg"  || ext === "jpeg" || ext === "png" ){
+      this.store
       .bills()
       .create({
         data: formData,
@@ -39,6 +44,11 @@ export default class NewBill {
         this.fileUrl = fileUrl
         this.fileName = fileName
       }).catch(error => console.error(error))
+    }else{
+      console.log(this.document.querySelector('input[data-testid=file]'))
+      this.document.querySelector('input[data-testid=file]')
+    }
+    
   }
   handleSubmit = e => {
     e.preventDefault()
