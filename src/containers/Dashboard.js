@@ -146,11 +146,16 @@ export default class {
     }
 
     bills.forEach(bill => {
-      $(`#open-bill${bill.id}`).click((e) => this.handleEditTicket(e, bill, bills))
+      
+      /* Correction bug Dashboard*/
+      // Pour chaque ticket faire en sorte qu'il ne soit cliqué qu'une fois en fonction de son id
+      $(`#open-bill${bill.id}`).off('click').on('click', (e) => this.handleEditTicket(e, bill, bills))
+
+      //ancien bug pour soutenance
+      // $(`#open-bill${bill.id}`).click((e) => this.handleEditTicket(e, bill, bills))    
+
+      return bills
     })
-
-    return bills
-
   }
 
   getBillsAllUsers = () => {
