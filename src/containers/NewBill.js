@@ -68,9 +68,9 @@ export default class NewBill {
           this.fileName = fileName;
         })
         .catch((error) => console.error(error));
-      //si le test n'est pas bon on affiche un pop up alert
+      //si le test n'est pas bon on affiche une alert
     } else {
-      alert("Votre fichier doit etre au format PNG, JPG ou JPEG");
+      alert("Votre fichier doit être au format PNG, JPG ou JPEG");
       //le nom de l'image avec mauvaise extension ne doit pas apparaitre
       inputFile.value = "";
     }
