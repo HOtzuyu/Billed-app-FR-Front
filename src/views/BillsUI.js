@@ -22,7 +22,7 @@ const row = (bill) => {
 /**
  * fix #1 : [Bug report] - Bills
  * @param {array} data 
- * @returns sort list
+ * @returns tableau rangé
  */
 const rows = (data) => {
   return data && data.length ?
