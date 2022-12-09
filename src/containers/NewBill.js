@@ -29,14 +29,19 @@ export default class NewBill {
     });
   }
 
-  
+
   handleChangeFile = (e) => {
     e.preventDefault();
     const inputFile = this.document.querySelector(`input[data-testid="file"]`);
     const file = this.document.querySelector(`input[data-testid="file"]`)
       .files[0];
+    // fix #3 : [Bug Hunt] - Bills
+    // vérifier si l'extension du fichier est bien dans les format jpg|png|jpeg
+    // Récupère le fichier
     const fileType = file.type;
+    //initialisation du RegExp
     const regexFile = /(jpg|png|jpeg)$/i;
+    //test le fichier avec le RegExp
     const testFile = regexFile.test(fileType);
     const filePath = e.target.value.split(/\\/g);
     const fileName = filePath[filePath.length - 1];
@@ -44,7 +49,7 @@ export default class NewBill {
     const email = JSON.parse(localStorage.getItem("user")).email;
     formData.append("file", file);
     formData.append("email", email);
-
+    //si le test est ok alors on continue
     if (testFile) {
       this.store
         .bills()
@@ -63,13 +68,15 @@ export default class NewBill {
           this.fileName = fileName;
         })
         .catch((error) => console.error(error));
+      //si le test n'est pas bon on affiche un pop up alert
     } else {
       alert("Votre fichier doit etre au format PNG, JPG ou JPEG");
+      //le nom de l'image avec mauvaise extension ne doit pas apparaitre
       inputFile.value = "";
     }
   };
 
-  
+
   handleSubmit = (e) => {
     e.preventDefault();
     const email = JSON.parse(localStorage.getItem("user")).email;
