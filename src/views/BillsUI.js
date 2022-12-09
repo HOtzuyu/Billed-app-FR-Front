@@ -20,7 +20,7 @@ const row = (bill) => {
 }
 
 /**
- * fix #1
+ * fix #1 : [Bug report] - Bills
  * @param {array} data 
  * @returns sort list
  */

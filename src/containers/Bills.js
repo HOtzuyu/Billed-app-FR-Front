@@ -55,7 +55,7 @@ export default class {
               try {
                 return {
                   ...doc,
-                  date: doc.date,
+                  date: doc.date, //retrait de la fonction formatDate (solution a vérifier) __ fix #1 : [Bug report] - Bills
                   status: formatStatus(doc.status)
                 }
               } catch (e) {
