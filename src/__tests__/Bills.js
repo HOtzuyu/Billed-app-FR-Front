@@ -76,6 +76,7 @@ describe("Given I am connected as an employee", () => {
     });
   });
 
+  /**************************************************************************/
   //test navigation ligne 19 containers/Bills.js
   describe("When I click on button 'Nouvelle note de frais' ", () => {
     //Quand je click sur le bouton 'Nouvelle note de frais'
@@ -175,8 +176,12 @@ describe("Given I am connected as an employee", () => {
       await waitFor(() => screen.getByText("Mes notes de frais"));
       expect(screen.getByText("Mes notes de frais")).toBeTruthy();
     });
+    /**************************************************************************/
 
-    // test d'integration get bill
+
+    /**
+     * test d'integration get bill
+     */
     describe("When I get bills", () => {
       test("Then it should render bills", async () => {
         const bills = new Bills({
@@ -192,7 +197,9 @@ describe("Given I am connected as an employee", () => {
       });
     });
 
-    //TEST ERREUR 404 ET 500
+    /**
+     * TEST ERREUR 404 ET 500
+     */
     test("Then it should display a 404 error message", async () => {
       mockStore.bills = jest.fn().mockImplementation(() => {
         Promise.reject(new Error("Erreur 404"));

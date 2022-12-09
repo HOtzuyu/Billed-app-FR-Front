@@ -29,8 +29,13 @@ import {
 } from "express/lib/application";
 import mockStore from "../__mocks__/store.js";
 
+//gestion page employée
 describe("Given I am connected as an employee", () => {
+  //Étant donné que je suis connecté en tant qu'employé
   describe("When I am on NewBill Page", () => {
+    //Quand je suis sur la page NewBill
+
+    //test affichage barre verticale 
     test("Then bill icon in vertical layout should be highlighted", async () => {
       Object.defineProperty(window, "localStorage", {
         value: localStorageMock,
@@ -51,6 +56,7 @@ describe("Given I am connected as an employee", () => {
       expect(mailIcon.className).toContain("active-icon");
     });
 
+    //Test des champs
     test("Then I show the form ", () => {
       const html = NewBillUI();
       document.body.innerHTML = html;
@@ -65,7 +71,10 @@ describe("Given I am connected as an employee", () => {
       expect(screen.getByRole("button")).toBeTruthy();
     });
 
+    //Validation du formulaire
     describe("When I submit the form  ", () => {
+
+      // test d'entrée du bon fichier
       test("Then I upload a file in right format    ", () => {
         window.alert = jest.fn()
 
@@ -108,6 +117,8 @@ describe("Given I am connected as an employee", () => {
         expect(handleChangeFile).toHaveBeenCalled();
         expect(window.alert).not.toHaveBeenCalled();
       });
+
+      // test d'entrée du mauvais fichier
       test("Then I upload a file in wrong format ", () => {
         const html = NewBillUI();
         document.body.innerHTML = html;
@@ -149,6 +160,7 @@ describe("Given I am connected as an employee", () => {
       });
     });
 
+    //SIMULATION DE CREATION DE LA PAGE DE FACTURE
     test("Then the new bill is created  ", () => {
       const html = NewBillUI();
       document.body.innerHTML = html;
@@ -186,6 +198,7 @@ describe("Given I am connected as an employee", () => {
         status: "pending",
       };
 
+      // Charger les valeurs dans les champs
       screen.getByTestId("expense-name").value = bill.name;
       screen.getByTestId("datepicker").value = bill.date;
       screen.getByTestId("amount").value = bill.amount;
@@ -196,7 +209,11 @@ describe("Given I am connected as an employee", () => {
       newBill.fileUrl = bill.fileUrl;
 
       const form = screen.getByTestId("form-new-bill");
+
+      //SIMULATION DE  CLICK
       newBill.updateBill = jest.fn();
+
+      //ENVOI DU FORMULAIRE
       const submitForm = jest.fn((e) => {
         newBill.handleSubmit(e);
       });
@@ -204,10 +221,14 @@ describe("Given I am connected as an employee", () => {
       form.addEventListener("submit", submitForm);
       fireEvent.submit(form);
 
+      //VERIFICATION DE L ENVOI DU FORMULAIRE
       expect(submitForm).toHaveBeenCalled();
+      //VERIFIE SI LE FORMULAIRE EST ENVOYER DANS LE STORE
       expect(newBill.updateBill).toHaveBeenCalled();
     });
 
+    //test erreur 500
+    //récupère l'erreur d'une API et échoue avec l'erreur 500
     test("Then the Error 500 ", async () => {
       Object.defineProperty(window, "localStorage", {
         value: localStorageMock,
@@ -239,6 +260,7 @@ describe("Given I am connected as an employee", () => {
         };
       });
 
+      // Soumettre le formulaire
       const form = screen.getByTestId("form-new-bill");
       newBill.updateBill = jest.fn();
       const submitForm = jest.fn((e) => {
@@ -247,6 +269,7 @@ describe("Given I am connected as an employee", () => {
       form.addEventListener("submit", submitForm);
       fireEvent.submit(form);
 
+      // Prevent Console.error jest error
       jest.spyOn(console, "error").mockImplementation(() => {});
       await new Promise(process.nextTick);
       expect(console.error).toBeCalled();
