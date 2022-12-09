@@ -41,8 +41,9 @@ export default class Login {
     e.preventDefault()
     const user = {
       type: "Admin",
-      email: e.target.querySelector(`input[data-testid="admin-email-input"]`).value,
-      password: e.target.querySelector(`input[data-testid="admin-password-input"]`).value,
+      // fix #2 : [Bug report] - Login
+      email: e.target.querySelector(`input[data-testid="admin-email-input"]`).value, //correction employee-email-input => admin-email-input
+      password: e.target.querySelector(`input[data-testid="admin-password-input"]`).value, //correction employee-password-input => admin-password-input
       status: "connected"
     }
     this.localStorage.setItem("user", JSON.stringify(user))
