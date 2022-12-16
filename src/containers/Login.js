@@ -13,7 +13,7 @@ export default class Login {
     const formEmployee = this.document.querySelector(`form[data-testid="form-employee"]`)
     formEmployee.addEventListener("submit", this.handleSubmitEmployee)
     const formAdmin = this.document.querySelector(`form[data-testid="form-admin"]`)
-    // Fait appel a la fonction handleSubmitAdmin
+    // Fait appel a la fonction handleSubmitAdmin 
     formAdmin.addEventListener("submit", this.handleSubmitAdmin) 
   }
   handleSubmitEmployee = e => {
